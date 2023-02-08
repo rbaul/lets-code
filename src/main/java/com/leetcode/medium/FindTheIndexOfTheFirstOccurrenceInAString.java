@@ -10,7 +10,7 @@ package com.leetcode.medium;
  * 1 <= haystack.length, needle.length <= 104
  * haystack and needle consist of only lowercase English characters.
  * <p>
- * https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/
+ * <a href="https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/">...</a>
  */
 public class FindTheIndexOfTheFirstOccurrenceInAString {
 	public int strStr(String haystack, String needle) {
