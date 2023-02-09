@@ -1,5 +1,20 @@
-package com.leetcode;
+package com.leetcode.medium;
 
+/**
+ * Add Two Numbers
+ * <p>
+ * You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
+ * <p>
+ * You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+ * <p>
+ * Constraints:
+ * <p>
+ * The number of nodes in each linked list is in the range [1, 100].
+ * 0 <= Node.val <= 9
+ * It is guaranteed that the list represents a number that does not have leading zeros.
+ *
+ * <a href="https://leetcode.com/problems/add-two-numbers/">Add Two Numbers</a>
+ */
 public class AddTwoNumbers {
 	
 	public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
@@ -19,7 +34,7 @@ public class AddTwoNumbers {
 			int sum = pointerL1.val + pointerL2.val + temp;
 			current.val = sum % 10;
 			temp = sum / 10;
-
+			
 			pointerL1 = pointerL1.next;
 			pointerL2 = pointerL2.next;
 			pointerPrevAcc = current;
