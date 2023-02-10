@@ -11,14 +11,14 @@ public class ListNode {
 	public int val;
 	public ListNode next;
 	
-	ListNode() {
+	public ListNode() {
 	}
 	
-	ListNode(int val) {
+	public ListNode(int val) {
 		this.val = val;
 	}
 	
-	ListNode(int val, ListNode next) {
+	public ListNode(int val, ListNode next) {
 		this.val = val;
 		this.next = next;
 	}
@@ -47,6 +47,20 @@ public class ListNode {
 			ListNode current = result;
 			for (int i = 1; i < list.size(); i++) {
 				current.next = new ListNode(list.get(i));
+				current = current.next;
+			}
+			return result;
+		}
+	}
+	
+	public static ListNode create(Integer... list) {
+		if (list == null) {
+			return new ListNode();
+		} else {
+			ListNode result = new ListNode(list[0]);
+			ListNode current = result;
+			for (int i = 1; i < list.length; i++) {
+				current.next = new ListNode(list[i]);
 				current = current.next;
 			}
 			return result;
