@@ -2,7 +2,7 @@ package com.leetcode.hard;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LFUCacheTest {
 	
@@ -27,5 +27,16 @@ class LFUCacheTest {
 		// cache=[3,4], cnt(4)=1, cnt(3)=3
 		assertEquals(4, lfu.get(4));      // return 4
 		// cache=[4,3], cnt(4)=2, cnt(3)=3
+	}
+	
+	@Test
+	void lfuCache_2() {
+		LFUCache lfu = new LFUCache(2);
+		lfu.put(2, 1);
+		lfu.put(1, 1);
+		lfu.put(2, 3);
+		lfu.put(4, 1);
+		assertEquals(-1, lfu.get(1));
+		assertEquals(3, lfu.get(2));
 	}
 }

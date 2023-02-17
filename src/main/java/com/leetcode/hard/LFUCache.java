@@ -61,12 +61,13 @@ public class LFUCache {
 			}
 			linkedNode = new LinkedNode(key, value);
 			map.put(key, linkedNode);
-			cache.addToLatest(linkedNode);
+			cache.addToFirst(linkedNode);
+			cache.moveToPrevCount(linkedNode);
 		} else {
 			linkedNode.value = value;
 			linkedNode.increase();
+			cache.moveToNextCount(linkedNode);
 		}
-		cache.moveToNextCount(linkedNode);
 	}
 	
 	private static class LinkedNode {
@@ -128,16 +129,16 @@ public class LFUCache {
 			while (prevUsed != first && prevUsed.count <= linkedNode.count) {
 				LinkedNode lastBounder = linkedNode.next;
 				LinkedNode firstBounder = prevUsed.prev;
-				
+
 				prevUsed.next = lastBounder;
 				lastBounder.prev = prevUsed;
-				
+
 				firstBounder.next = linkedNode;
 				linkedNode.prev = firstBounder;
-				
+
 				linkedNode.next = prevUsed;
 				prevUsed.prev = linkedNode;
-				
+
 				prevUsed = linkedNode.prev;
 			}
 		}
@@ -164,12 +165,38 @@ public class LFUCache {
 			return stringBuilder.toString();
 		}
 		
-		public void addToLatest(LinkedNode linkedNode) {
-			linkedNode.next = last;
-			linkedNode.prev = last.prev;
-			last.prev.next = linkedNode;
-			last.prev = linkedNode;
+//		public void addToLatest(LinkedNode linkedNode) {
+//			linkedNode.next = last;
+//			linkedNode.prev = last.prev;
+//			last.prev.next = linkedNode;
+//			last.prev = linkedNode;
+//		}
+		
+		public void addToFirst(LinkedNode linkedNode) {
+			linkedNode.prev = first;
+			linkedNode.next = first.next;
+			first.next.prev = linkedNode;
+			first.next = linkedNode;
 		}
 		
+		public void moveToPrevCount(LinkedNode linkedNode) {
+			LinkedNode nextUsed = linkedNode.next;
+			while (nextUsed != last && nextUsed.count > linkedNode.count) {
+				LinkedNode lastBounder = nextUsed.next;
+				LinkedNode firstBounder = linkedNode.prev;
+				
+				linkedNode.next = lastBounder;
+				lastBounder.prev = linkedNode;
+				
+				nextUsed.prev = firstBounder;
+				firstBounder.next = nextUsed;
+				
+				nextUsed.next = linkedNode;
+				linkedNode.prev = nextUsed;
+				
+				nextUsed = linkedNode.next;
+			}
+		}
+
 	}
 }
