@@ -33,7 +33,7 @@ public class TreeNode {
 	private static void populateLevelList(TreeNode treeNode, List<Integer> result) {
 		Integer value = treeNode == null ? null : treeNode.val;
 		result.add(value);
-		if (treeNode != null) {
+		if (treeNode != null && (treeNode.left != null || treeNode.right != null)) {
 			populateLevelList(treeNode.left, result);
 			populateLevelList(treeNode.right, result);
 		}
