@@ -2,6 +2,7 @@ package com.leetcode.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Definition for a binary tree node.
@@ -36,6 +37,26 @@ public class TreeNode {
 		if (treeNode != null && (treeNode.left != null || treeNode.right != null)) {
 			populateLevelList(treeNode.left, result);
 			populateLevelList(treeNode.right, result);
+		}
+	}
+	
+	public static List<Integer> convertToListLevel2(TreeNode treeNode) {
+		List<List<Integer>> result = new ArrayList<>();
+		populateLevelList(treeNode, result, 0);
+		
+		return result.stream().flatMap(List::stream).collect(Collectors.toList());
+	}
+	
+	private static void populateLevelList(TreeNode treeNode, List<List<Integer>> result, int level) {
+		Integer value = treeNode == null ? null : treeNode.val;
+		if (level == result.size()) {
+			result.add(new ArrayList<>());
+		}
+		result.get(level).add(value);
+		
+		if (treeNode != null && (treeNode.left != null || treeNode.right != null)) {
+			populateLevelList(treeNode.left, result, level + 1);
+			populateLevelList(treeNode.right, result, level + 1);
 		}
 	}
 }
