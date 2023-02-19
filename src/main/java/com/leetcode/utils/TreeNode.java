@@ -1,6 +1,7 @@
 package com.leetcode.utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -59,4 +60,39 @@ public class TreeNode {
 			populateLevelList(treeNode.right, result, level + 1);
 		}
 	}
+	
+	public static TreeNode createFromList(Integer... nums) {
+		if (nums == null) {
+			return null;
+		}
+		
+		TreeNode root = new TreeNode(nums[0]);
+		createFromList(root, 2, 0, Arrays.copyOfRange(nums, 1, nums.length));
+		return root;
+	}
+	
+	public static void createFromList(TreeNode root, int level, int index, Integer... nums) {
+		if (nums == null || nums.length == 0) {
+			return;
+		}
+		
+		Integer leftVal = nums[index];
+		if (leftVal != null) {
+			root.left = new TreeNode(leftVal);
+			if (level < nums.length) {
+				createFromList(root.left, level * 2, index * 2, Arrays.copyOfRange(nums, level, nums.length));
+			}
+		}
+		
+		if (index + 1 < nums.length) {
+			Integer rightVal = nums[index + 1];
+			if (rightVal != null) {
+				root.right = new TreeNode(rightVal);
+				if (level < nums.length) {
+					createFromList(root.right, level * 2, index * 2 + 2, Arrays.copyOfRange(nums, level, nums.length));
+				}
+			}
+		}
+	}
+	
 }
