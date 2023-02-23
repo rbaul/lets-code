@@ -76,11 +76,13 @@ public class TreeNode {
 			return;
 		}
 		
-		Integer leftVal = nums[index];
-		if (leftVal != null) {
-			root.left = new TreeNode(leftVal);
-			if (level < nums.length) {
-				createFromList(root.left, level * 2, index * 2, Arrays.copyOfRange(nums, level, nums.length));
+		if (index < nums.length) {
+			Integer leftVal = nums[index];
+			if (leftVal != null) {
+				root.left = new TreeNode(leftVal);
+				if (level < nums.length) {
+					createFromList(root.left, level * 2, index * 2, Arrays.copyOfRange(nums, level, nums.length));
+				}
 			}
 		}
 		
