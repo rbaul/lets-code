@@ -19,7 +19,7 @@ class DeleteNodeInALinkedListTest {
 	
 	@Test
 	void deleteNode_2() {
-		ListNode head = ListNode.create(4,5,1,9);
+		ListNode head = ListNode.create(4, 5, 1, 9);
 		DeleteNodeInALinkedList test = new DeleteNodeInALinkedList(head);
 		test.deleteNode(head.next.next);
 		assertEquals(List.of(4, 5, 9), ListNode.convertToList(head));
