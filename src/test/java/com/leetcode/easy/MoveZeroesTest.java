@@ -21,4 +21,11 @@ class MoveZeroesTest {
 		test.moveZeroes(nums);
 		assertArrayEquals(new int[]{0}, nums);
 	}
+	
+	@Test
+	void moveZeroes_3() {
+		int[] nums = {4, 1, 5, 3, 12};
+		test.moveZeroes(nums);
+		assertArrayEquals(new int[]{4, 1, 5, 3, 12}, nums);
+	}
 }

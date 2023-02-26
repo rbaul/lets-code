@@ -21,20 +21,17 @@ package com.leetcode.easy;
 public class MoveZeroes {
 	public void moveZeroes(int[] nums) {
 		int startIndex = 0;
+		int pointer = 0;
 		
-		while (startIndex < nums.length - 1) {
-			if (nums[startIndex] == 0) {
-				int nonZeroIndex = startIndex + 1;
-				while (nonZeroIndex < nums.length && nums[nonZeroIndex] == 0) {
-					nonZeroIndex++;
+		while (pointer < nums.length) {
+			if (nums[pointer] != 0) {
+				if (startIndex != pointer) {
+					nums[startIndex] = nums[pointer];
+					nums[pointer] = 0;
 				}
-				
-				if (nonZeroIndex < nums.length) {
-					nums[startIndex] = nums[nonZeroIndex];
-					nums[nonZeroIndex] = 0;
-				}
+				startIndex++;
 			}
-			startIndex++;
+			pointer++;
 		}
 	}
 }
